@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from '@material-ui/core';
 import { AppBar } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
@@ -8,9 +8,17 @@ import Jobs from './Components/Jobs/jobs'
 // import Job from './Components/Jobs/Job/job'
 import Form from './Components/Form/form'
 import useStyles from './styles'
+import { useDispatch } from 'react-redux';
+import { getJobs } from './actions/jobs';
 
 const App = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getJobs());
+    }, [dispatch]);
+
     return (
         <Container maxWidth='lg'>
             <AppBar className={classes.appBar} position='static' color='inherit'>
