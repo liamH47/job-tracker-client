@@ -9,12 +9,26 @@ const Job = ({ job }) => {
     const classes = useStyles();
     return(
         <Card className={classes.card}>
-            {/* <CardMedia className={classes.media} title={job.role} /> */}
+            <CardContent>
+                <Typography variant='h5' component='h2' gutterBottom>
+                    {job.company}
+                </Typography>
+                <Typography>
+                    {job.role}
+                </Typography>
+                <Typography variant='body2'>
+                    {`Status: ${job.status} as of: ${moment(job.applied).fromNow()}`}
+                </Typography>
+                <Button color='primary' size='small'>
+                    Edit
+                </Button>                
+            </CardContent>
+            {/* <CardMedia className={classes.media} title={job.role} />
             <div className={classes.overlay}>
                 <Typography variant='h5'>{job.company}</Typography>
                 <Typography variant='body2'>{`Status: ${job.status} as of: ${moment(job.applied).fromNow()}`}</Typography>
             </div>
-                <MoreHorizIcon />
+                <MoreHorizIcon /> */}
             {/* <div className={classes.overlay2}>
                 <Button color='white size='small' >
                     <MoreHorizIcon fontSize='default' />
