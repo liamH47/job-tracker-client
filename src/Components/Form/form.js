@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { createJob } from '../../actions/jobs'
+import { createJob, updateJob } from '../../actions/jobs'
+import { useSelector } from 'react-redux'
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
     const [jobData, setJobData] = useState({
         company: '', 
         industry: '', 
         role: '', 
         notes: ''
     })
+    const job = useSelector((state) => currentId ? state.jobs.find((j) => j._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    useEffect(() => {
+      if(job) setJobData(job)
+    }, [job])
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createJob(jobData));
+        if(currentId){
+          dispatch(updateJob(currentId, jobData))
+        }else{
+          dispatch(createJob(jobData));
+        }
     }
 
     const clear = () => {
@@ -25,7 +35,7 @@ const Form = () => {
     return(
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant='h6'>Add a Job</Typography>
+                <Typography variant='h6'>{currentId ? 'Edit' : 'Create'} a Job</Typography>
                 <TextField 
                   name='company' 
                   variant='outlined' 

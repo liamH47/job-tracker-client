@@ -19,3 +19,12 @@ export const createJob = (job) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const updateJob = (id, job) => async (dispatch) => {
+    try {
+        const { data } = await api.updateJob(id, job);
+        dispatch({ type: 'UPDATE', payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
