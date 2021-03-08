@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 
-const Job = ({ job }) => {
+const Job = ({ job, setCurrentId }) => {
     const classes = useStyles();
     return(
         <Card className={classes.card}>
@@ -19,7 +19,7 @@ const Job = ({ job }) => {
                 <Typography variant='body2'>
                     {`Status: ${job.status} as of: ${moment(job.applied).fromNow()}`}
                 </Typography>
-                <Button color='primary' size='small'>
+                <Button color='primary' size='small' onClick={() => setCurrentId(job._id)}>
                     Edit
                 </Button>                
             </CardContent>
