@@ -9,11 +9,12 @@ const Job = ({ job }) => {
     const classes = useStyles();
     return(
         <Card className={classes.card}>
-            <CardMedia className={classes.media} title={job.role} />
+            {/* <CardMedia className={classes.media} title={job.role} /> */}
             <div className={classes.overlay}>
                 <Typography variant='h5'>{job.company}</Typography>
                 <Typography variant='body2'>{`Status: ${job.status} as of: ${moment(job.applied).fromNow()}`}</Typography>
             </div>
+                <MoreHorizIcon />
             {/* <div className={classes.overlay2}>
                 <Button color='white size='small' >
                     <MoreHorizIcon fontSize='default' />
