@@ -27,10 +27,12 @@ const Form = ({ currentId, setCurrentId }) => {
         }else{
           dispatch(createJob(jobData));
         }
+        clear();
     }
 
     const clear = () => {
-
+        setCurrentId(null);
+        setJobData({company: '', industry: '', role: '', notes: ''});
     }
     return(
         <Paper className={classes.paper}>
