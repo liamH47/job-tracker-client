@@ -1,5 +1,7 @@
 export default (jobs = [], action) => {
     switch (action.type) {
+        case 'DELETE':
+            return jobs.filter((job) => job._id !== action.payload);
         case 'FETCH_ALL':
             return action.payload;
         case 'CREATE':

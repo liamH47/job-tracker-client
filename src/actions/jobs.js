@@ -28,3 +28,12 @@ export const updateJob = (id, job) => async (dispatch) => {
         console.log(error.message);
     }
 }
+
+export const deleteJob = (id) => async(dispatch) => {
+    try {
+        await api.deleteJob(id);
+        dispatch({ type: 'DELETE', payload: id})
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -4,9 +4,12 @@ import { Card, CardActions, CardMedia, Button, Typography, CardContent } from '@
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
-
+import { useDispatch } from 'react-redux';
+import { deleteJob } from '../../../actions/jobs'
+ 
 const Job = ({ job, setCurrentId }) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     return(
         <Card className={classes.card}>
             <CardContent>
@@ -21,7 +24,10 @@ const Job = ({ job, setCurrentId }) => {
                 </Typography>
                 <Button color='primary' size='small' onClick={() => setCurrentId(job._id)}>
                     Edit
-                </Button>                
+                </Button>
+                <Button color='primary' size='small' onClick={() => dispatch(deleteJob(job._id))}>
+                    Delete
+                </Button>                               
             </CardContent>
             {/* <CardMedia className={classes.media} title={job.role} />
             <div className={classes.overlay}>
