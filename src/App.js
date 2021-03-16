@@ -10,6 +10,7 @@ import Form from './Components/Form/form'
 import useStyles from './styles'
 import { useDispatch } from 'react-redux';
 import { getJobs } from './actions/jobs';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 const App = () => {
     const [currentId, setCurrentId] = useState(null);
