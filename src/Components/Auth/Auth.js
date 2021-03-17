@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import useStyles from './styles'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -6,7 +6,7 @@ import Input from './Input';
 
 const Auth = () => {
     const classes = useStyles();
-    const isSignUp = false;
+    const [isSignUp, setIsSignUp] = useState(false);
 
     const submitHandler = () => {
 
@@ -14,6 +14,10 @@ const Auth = () => {
 
     const handleChange = () => {
 
+    };
+
+    const switchForm = () => {
+        setIsSignUp((prevState) => !prevState)
     };
 
     return (
@@ -40,6 +44,13 @@ const Auth = () => {
               <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
                   { isSignUp ? 'Sign Up' : 'Sign In'}
               </Button>
+              <Grid container justify='flex-end'>
+                <Grid item>
+                  <Button onClick={switchForm}>
+                      { isSignUp ? 'Have an account already? Sign In' : "Don't have an account yet? Sign Up" }
+                  </Button>
+                </Grid> 
+              </Grid>
             </form>
           </Paper>
         </Container>
