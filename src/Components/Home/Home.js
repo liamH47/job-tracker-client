@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from '@material-ui/core';
-import { AppBar } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
 import { Grow } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import Jobs from '../Jobs/jobs'
