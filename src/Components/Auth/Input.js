@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Grid, InputAdornment, IconButton } from '@material-ui/core';
+import { TextField, Grid } from '@material-ui/core';
 
 const Input = ({ name, half, handleChange, label, autoFocus, type }) => {
     return (
