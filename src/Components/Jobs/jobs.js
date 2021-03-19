@@ -23,3 +23,7 @@ const Jobs = ({ setCurrentId }) => {
 }
 
 export default Jobs;
+
+/*
+    const user = JSON.parse(localStorage.getItem('profile'));
+*/
