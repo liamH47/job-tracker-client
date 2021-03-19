@@ -6,8 +6,10 @@ import { createJob, updateJob } from '../../actions/jobs'
 import { useSelector } from 'react-redux'
 
 const Form = ({ currentId, setCurrentId }) => {
+    const user = JSON.parse(localStorage.getItem('profile'));
     const [jobData, setJobData] = useState({
-        company: '', 
+        company: '',
+        creator: user.result.name, 
         industry: '', 
         role: '', 
         notes: ''
@@ -15,19 +17,32 @@ const Form = ({ currentId, setCurrentId }) => {
     const job = useSelector((state) => currentId ? state.jobs.find((j) => j._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
+    // console.log('user:', user);
+    // debugger
 
     useEffect(() => {
       if(job) setJobData(job)
     }, [job])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(currentId){
-          dispatch(updateJob(currentId, jobData))
+          dispatch(updateJob(currentId, { ...jobData, creator: user?.result?.name }));
+          clear();
         }else{
-          dispatch(createJob(jobData));
+          dispatch(createJob({ ...jobData, creator: user?.result?.name }));
+          clear();
         }
-        clear();
+    }
+
+    if(!user?.result?.name){
+      return (
+        <Paper className={classes.paper}>
+          <Typography variant='h6' align='center'>
+            Please Sign in to Create a Job  
+          </Typography>
+        </Paper>
+      )
     }
 
     const clear = () => {
