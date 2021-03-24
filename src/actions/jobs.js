@@ -18,6 +18,7 @@ export const createJob = (job) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
+    //
 }
 
 export const updateJob = (id, job) => async (dispatch) => {

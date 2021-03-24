@@ -6,6 +6,8 @@ import { Grid, CircularProgress } from '@material-ui/core'
 
 
 const Jobs = ({ setCurrentId }) => {
+    const user = localStorage.getItem('profile');
+    console.log("user:", user);
     const jobs = useSelector((state) => state.jobs)
     const classes = useStyles();
     console.log(jobs)
