@@ -9,7 +9,7 @@ const Form = ({ currentId, setCurrentId }) => {
     const user = JSON.parse(localStorage.getItem('profile'));
     const [jobData, setJobData] = useState({
         company: '',
-        creator: user.result.name, 
+        // creator: user.result.name, 
         industry: '', 
         role: '', 
         notes: ''
@@ -27,10 +27,10 @@ const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(currentId){
-          dispatch(updateJob(currentId, { ...jobData, creator: user?.result?.name }));
+          dispatch(updateJob(currentId, { ...jobData}));
           clear();
         }else{
-          dispatch(createJob({ ...jobData, creator: user?.result?.name }));
+          dispatch(createJob({ ...jobData}));
           clear();
         }
     }
