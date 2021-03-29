@@ -3,9 +3,10 @@ import Job from './Job/job';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
 import { Grid, CircularProgress } from '@material-ui/core'
-
+import Column from './Column/Column'
 
 const Jobs = ({ setCurrentId }) => {
+    const columns = ['Preparing', 'Applied', 'Interviewing']
     const user = localStorage.getItem('profile');
     console.log("user:", user);
     const googleId = JSON.parse(user).result.googleId;
@@ -18,13 +19,10 @@ const Jobs = ({ setCurrentId }) => {
     return(
         !myJobs.length ? <CircularProgress /> : (
             <Grid className={classes.container} container alignItems='stretch' spacing={3}>
-                {myJobs.map((job) => (
-                   <Grid item key={job._id} xs={12} sm={6}> 
-                        <Job job={job} setCurrentId={setCurrentId}/>
-                   </Grid> 
-                ))}
+                {columns.map(column => <Column setCurrentId={setCurrentId} title={column}/>)}
             </Grid>
         )
+
     )
 }
 
@@ -34,5 +32,9 @@ export default Jobs;
     const user = JSON.parse(localStorage.getItem('profile'));
     const googleId = JSON.parse(user.result.googleID)
     JSON.parse(localStorage.getItem('profile')).result.googleId
-
+                {myJobs.map((job) => (
+                   <Grid item key={job._id} xs={12} sm={6}> 
+                        <Job job={job} setCurrentId={setCurrentId}/>
+                   </Grid> 
+                ))}
 */

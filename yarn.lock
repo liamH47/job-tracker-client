@@ -1598,7 +1598,7 @@
     "@emotion/cache" "^11.0.0"
     "prop-types" "^15.7.2"
 
-"@material-ui/styles@5.0.0-alpha.27":
+"@material-ui/styles@^5.0.0-alpha.27", "@material-ui/styles@5.0.0-alpha.27":
   "integrity" "sha512-J4rM0DwQBlKQfj5SoJP8D2p3ApEJ7xq8aMyABxxLOOx2YfeEdR+Dho3M9WB7mYvIXRq2FTk2EASbw93f38mOpQ=="
   "resolved" "https://registry.npmjs.org/@material-ui/styles/-/styles-5.0.0-alpha.27.tgz"
   "version" "5.0.0-alpha.27"
