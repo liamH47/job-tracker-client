@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {getJobs} from '../../../actions/jobs'
-import Job from '../Job/job'
-import { Grid, Typography } from '@material-ui/core'
+import { getJobs } from '../../../actions/jobs';
+import Job from '../Job/job';
+import { Grid, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
+import { bindActionCreators, compose } from 'redux';
+import styles from './styles';
 
 
 class Column extends Component {
 
     componentDidMount() {
-        console.log('in column cdm:', this.props.jobs)
-        console.log('in column cdm title:', this.props)
+        // console.log('in column cdm:', this.props.jobs)
+        // console.log('in column cdm title:', this.props)
 
     }
     
@@ -26,11 +29,15 @@ class Column extends Component {
     }
 
     render() {
+        const { title, classes } = this.props;
         return (
-            <>
-              <Typography variant='h5'>{this.props.title}</Typography>
-              {this.renderMyJobs()}
-            </>
+              <div className={classes.container}>
+                <Typography className={classes.title} variant='h5'>{title}</Typography>
+                <div className={classes.joblist}>
+                  {this.renderMyJobs()}
+                </div>
+              </div>
+
         )
     }
 }
@@ -47,4 +54,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Column);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles),)(Column);
