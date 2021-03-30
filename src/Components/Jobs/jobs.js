@@ -2,8 +2,9 @@ import React from 'react';
 import Job from './Job/job';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
-import { Grid, CircularProgress } from '@material-ui/core'
-import Column from './Column/Column'
+import { Grid, CircularProgress } from '@material-ui/core';
+import Column from './Column/Column';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const Jobs = ({ setCurrentId }) => {
     const columns = ['Preparing', 'Applied', 'Interviewing']
@@ -18,9 +19,14 @@ const Jobs = ({ setCurrentId }) => {
     console.log("myjobs:", myJobs)
     return(
         !myJobs.length ? <CircularProgress /> : (
-            <Grid className={classes.container} container alignItems='stretch' spacing={3}>
-                {columns.map(column => <Column setCurrentId={setCurrentId} title={column}/>)}
-            </Grid>
+            <DragDropContext>
+                <section className={classes.mainContainer}>
+                    {columns.map(column => <Column setCurrentId={setCurrentId} title={column}/>)}
+                </section>
+            </DragDropContext>
+        
+            // <Grid className={classes.container} container alignItems='stretch' spacing={3}>
+
         )
 
     )
