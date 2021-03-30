@@ -39,11 +39,11 @@ class Column extends Component {
     }
 
     render() {
-        const { title, classes } = this.props;
+        const { title, classes, index } = this.props;
         return (
               <div className={classes.container}>
                 <Typography className={classes.title} variant='h5'>{title}</Typography>
-                <Droppable droppableId={title}>
+                <Droppable droppableId={index}>
                   {(provided) => (
                     <JobList 
                       {...provided.droppableProps}

@@ -18,6 +18,17 @@ const Jobs = ({ setCurrentId }) => {
     const classes = useStyles();
     // console.log("myjobs:", myJobs)
     const onDragEnd = (result) => {
+      const { destination, source, draggableId } = result;
+
+      if(!destination) {
+          return;
+      }
+
+      if(destination.droppableId === source.droppableId && 
+        destination.index === source.index
+        ) {
+          return;
+        }
 
     }
 
@@ -25,7 +36,7 @@ const Jobs = ({ setCurrentId }) => {
         !myJobs.length ? <CircularProgress /> : (
             <DragDropContext onDragEnd={onDragEnd}>
                 <section className={classes.mainContainer}>
-                    {columns.map(column => <Column setCurrentId={setCurrentId} title={column}/>)}
+                    {columns.map((column, index) => <Column index={index} setCurrentId={setCurrentId} title={column}/>)}
                 </section>
             </DragDropContext>
         
