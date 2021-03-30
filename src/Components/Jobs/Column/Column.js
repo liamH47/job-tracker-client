@@ -6,6 +6,16 @@ import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import { bindActionCreators, compose } from 'redux';
 import styles from './styles';
+import { Droppable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
+
+const JobList = styled.div`
+  padding: '8px',
+  transition: 'background-color 0.2s ease-in',
+  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
+  flexGrow: 1,
+  minHeight: '100px'  
+`;
 
 
 class Column extends Component {
@@ -21,10 +31,10 @@ class Column extends Component {
         const googleId = JSON.parse(user).result.googleId;
         const myJobs = this.props.jobs.filter(job => job.creator === googleId.toString())
         let filteredJobs = myJobs.filter(job => job.status === this.props.title)
-        return filteredJobs.map((job) => (
-            <Grid item key={job._id} xs={12} sm={6}> 
-              <Job job={job} setCurrentId={this.props.setCurrentId} />
-            </Grid> 
+        return filteredJobs.map((job, index) => (
+              <Job job={job} id={job._id} index={index} key={job._id} setCurrentId={this.props.setCurrentId} />
+            // <Grid item key={job._id} xs={12} sm={6}> 
+            // </Grid> 
         ))
     }
 
@@ -33,9 +43,18 @@ class Column extends Component {
         return (
               <div className={classes.container}>
                 <Typography className={classes.title} variant='h5'>{title}</Typography>
-                <div className={classes.joblist}>
-                  {this.renderMyJobs()}
-                </div>
+                <Droppable droppableId={title}>
+                  {(provided) => (
+                    <JobList 
+                      {...provided.droppableProps}
+                      innerRef={provided.innerRef}
+                      ref={provided.innerRef}
+                    >
+                      {this.renderMyJobs()}
+                      {provided.placeholder}
+                    </JobList>
+                  )}
+                </Droppable>
               </div>
 
         )

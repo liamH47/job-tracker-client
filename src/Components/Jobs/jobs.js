@@ -9,17 +9,21 @@ import { DragDropContext } from 'react-beautiful-dnd';
 const Jobs = ({ setCurrentId }) => {
     const columns = ['Preparing', 'Applied', 'Interviewing']
     const user = localStorage.getItem('profile');
-    console.log("user:", user);
+    // console.log("user:", user);
     const googleId = JSON.parse(user).result.googleId;
-    console.log("parsed googleId:", googleId)
+    // console.log("parsed googleId:", googleId)
     const jobs = useSelector((state) => state.jobs)
     const myJobs = jobs.filter(job => job.creator === googleId.toString())
     // debugger
     const classes = useStyles();
-    console.log("myjobs:", myJobs)
+    // console.log("myjobs:", myJobs)
+    const onDragEnd = (result) => {
+
+    }
+
     return(
         !myJobs.length ? <CircularProgress /> : (
-            <DragDropContext>
+            <DragDropContext onDragEnd={onDragEnd}>
                 <section className={classes.mainContainer}>
                     {columns.map(column => <Column setCurrentId={setCurrentId} title={column}/>)}
                 </section>

@@ -4,6 +4,7 @@ export default {
       border: '1px solid lightgrey',
       borderRadius: '2px',
       width: '25%',
+      height: '80%',
       display: 'flex',
       flexDirection: "column"        
     },
