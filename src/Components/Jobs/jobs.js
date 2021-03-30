@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Job from './Job/job';
-import useStyles from './styles';
+import styles from './styles';
 import { useSelector } from 'react-redux';
 import { Grid, CircularProgress } from '@material-ui/core';
 import Column from './Column/Column';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { withStyles } from '@material-ui/styles';
+import { bindActionCreators, compose } from 'redux';
+import { connect } from 'react-redux';
+import { getJobs } from '../../actions/jobs';
 
-const Jobs = ({ setCurrentId }) => {
-    const columns = ['Preparing', 'Applied', 'Interviewing']
-    const user = localStorage.getItem('profile');
-    // console.log("user:", user);
-    const googleId = JSON.parse(user).result.googleId;
-    // console.log("parsed googleId:", googleId)
-    const jobs = useSelector((state) => state.jobs)
-    const myJobs = jobs.filter(job => job.creator === googleId.toString())
-    // debugger
-    const classes = useStyles();
-    // console.log("myjobs:", myJobs)
-    const onDragEnd = (result) => {
+class Jobs extends Component {
+
+    state = {
+      columns: ['Preparing', 'Applied', 'Interviewing']
+    }
+
+    onDragEnd = (result) => {
       const { destination, source, draggableId } = result;
 
       if(!destination) {
@@ -31,31 +30,31 @@ const Jobs = ({ setCurrentId }) => {
         }
 
     }
-
-    return(
-        !myJobs.length ? <CircularProgress /> : (
-            <DragDropContext onDragEnd={onDragEnd}>
-                <section className={classes.mainContainer}>
-                    {columns.map((column, index) => <Column index={index} setCurrentId={setCurrentId} title={column}/>)}
-                </section>
-            </DragDropContext>
-        
-            // <Grid className={classes.container} container alignItems='stretch' spacing={3}>
-
+    render(){
+        const { classes } = this.props;
+        return(
+            !this.props.jobs.length ? <CircularProgress /> : (
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <section className={classes.mainContainer}>
+                        {this.state.columns.map((column, index) => <Column index={index} setCurrentId={this.props.setCurrentId} title={column}/>)}
+                    </section>
+                </DragDropContext>        
+                // <Grid className={classes.container} container alignItems='stretch' spacing={3}>
+            )
         )
-
-    )
+    }
 }
 
-export default Jobs;
+function mapDispatchToProps(dispatch){
+    return{
+        fetchJobs: () => dispatch(getJobs())
+    }
+}
 
-/*
-    const user = JSON.parse(localStorage.getItem('profile'));
-    const googleId = JSON.parse(user.result.googleID)
-    JSON.parse(localStorage.getItem('profile')).result.googleId
-                {myJobs.map((job) => (
-                   <Grid item key={job._id} xs={12} sm={6}> 
-                        <Job job={job} setCurrentId={setCurrentId}/>
-                   </Grid> 
-                ))}
-*/
+function mapStateToProps(state){
+    return {
+        jobs: state.jobs
+    }
+}
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles),)(Jobs);
