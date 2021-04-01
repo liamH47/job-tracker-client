@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { getJobs, updateJob, updateIndices } from '../../actions/jobs';
 
 const columns = ['Preparing', 'Applied', 'Interviewing'];
+let allMyJobs = [];
 class Jobs extends Component {
 
   componentDidMount() {
@@ -27,10 +28,28 @@ class Jobs extends Component {
       return id.slice(0, pls);
     }
 
+    addIndex = (job, index) => {
+      job.index = index;
+    }
+
+    indexAll = (array) => {
+      return array.forEach(this.addIndex);
+    }
+
+    filterColumns = (columnName) => {
+
+      const user = localStorage.getItem('profile');
+      const googleId = JSON.parse(user).result.googleId;
+      const myJobs = this.props.jobs.filter(job => job.creator === googleId.toString())
+      // allMyJobs.push(myJobs);
+      let columnArray = myJobs.filter(job => job.status === columnName)
+      allMyJobs.push(...columnArray)
+    }
+
     onDragEnd = (result) => {
       
       const { destination, source, draggableId } = result;
-      console.log('result:', result)
+      // console.log('result:', result)
       if(!destination) {
           return;
       }
@@ -45,14 +64,24 @@ class Jobs extends Component {
 
       let draggedItem = this.props.jobs.find(job => job._id === draggableId);
       let newColumn = this.getColumn(destination.droppableId)
+      console.log('alljobs before filter test:', allMyJobs)
       draggedItem.status = newColumn;
+      console.log('newColumn:', destination);
+      allMyJobs = [];
+      // console.log('apply filter test', this.filterColumns('Applied'))
+      columns.forEach(column => this.filterColumns(column));
+      let indexed = this.indexAll(allMyJobs)
+      console.log('alljobs after filter test:', allMyJobs);
+      console.log('indexed pls:', allMyJobs);
       // this.props.updateJob(draggedItem._id, draggedItem);
       // this.props.updateIndices()
 
       
-
+      //we need jobs to be reordered in a way that represents the overarching order, as if it were prepared, then applied, then interviewing
+      //map over that array to ensure that each item has an index
+      //then updateIndices
     }
-
+    
 
     render(){
         const { classes } = this.props;

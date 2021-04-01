@@ -22,7 +22,7 @@ class Column extends Component {
 
     
     renderMyJobs = () => {
-      console.log('checking jobs', this.props.jobs)
+      // console.log('checking jobs', this.props.jobs)
         const user = localStorage.getItem('profile');
         const googleId = JSON.parse(user).result.googleId;
         const myJobs = this.props.jobs.filter(job => job.creator === googleId.toString())
@@ -36,7 +36,7 @@ class Column extends Component {
 
     render() {
         const { title, classes, index } = this.props;
-        console.log('in column render:', this.props)
+        // console.log('in column render:', this.props)
         return (
               <div className={classes.container}>
                 <Typography className={classes.title} variant='h5'>{title}</Typography>
