@@ -24,14 +24,15 @@ class Column extends Component {
     renderMyJobs = () => {
       // console.log('checking jobs', this.props.jobs)
         const user = localStorage.getItem('profile');
-        const googleId = JSON.parse(user).result.googleId;
-        const myJobs = this.props.jobs.filter(job => job.creator === googleId.toString())
+        const userId = JSON.parse(user).result.email;
+        const myJobs = this.props.jobs.filter(job => job.creator === userId)
         let filteredJobs = myJobs.filter(job => job.status === this.props.title)
         return filteredJobs.map((job, index) => (
               <Job job={job} id={job._id} index={index} key={job._id} setCurrentId={this.props.setCurrentId} />
             // <Grid item key={job._id} xs={12} sm={6}> 
             // </Grid> 
         ))
+        // JSON.parse(user).result.email
     }
 
     render() {
