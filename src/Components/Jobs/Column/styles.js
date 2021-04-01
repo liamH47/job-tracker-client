@@ -6,7 +6,8 @@ export default {
       width: '25%',
       height: '80%',
       display: 'flex',
-      flexDirection: "column"        
+      flexDirection: "column", 
+      backgroundColor: 'skyblue'      
     },
     title: {
         padding: '8px',
