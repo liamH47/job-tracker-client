@@ -24,7 +24,13 @@ class Column extends Component {
     renderMyJobs = () => {
       // console.log('checking jobs', this.props.jobs)
         const user = localStorage.getItem('profile');
-        const userId = JSON.parse(user).result.email;
+        let userId = null;
+        if(JSON.parse(user).result._id){
+          userId = JSON.parse(user).result._id;
+        } else if(JSON.parse(user).result.googleId){
+          userId = JSON.parse(user).result.googleId;
+        }
+        // const userId = JSON.parse(user).result.email;
         const myJobs = this.props.jobs.filter(job => job.creator === userId)
         let filteredJobs = myJobs.filter(job => job.status === this.props.title)
         return filteredJobs.map((job, index) => (
@@ -33,6 +39,9 @@ class Column extends Component {
             // </Grid> 
         ))
         // JSON.parse(user).result.email
+        // const user = localStorage.getItem('profile');
+        // const googleId = JSON.parse(user).result.googleId;
+        // const myJobs = this.props.jobs.filter(job => job.creator === googleId.toString())
     }
 
     render() {

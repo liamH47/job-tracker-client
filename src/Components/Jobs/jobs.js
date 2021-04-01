@@ -39,7 +39,12 @@ class Jobs extends Component {
     filterColumns = (columnName) => {
 
       const user = localStorage.getItem('profile');
-      const userId = JSON.parse(user).result.email;
+      let userId = null;
+      if(JSON.parse(user).result._id){
+        userId = JSON.parse(user).result._id;
+      } else if(JSON.parse(user).result.googleId){
+        userId = JSON.parse(user).result.googleId;
+      }
       const myJobs = this.props.jobs.filter(job => job.creator === userId)
       // allMyJobs.push(myJobs);
       let columnArray = myJobs.filter(job => job.status === columnName)
