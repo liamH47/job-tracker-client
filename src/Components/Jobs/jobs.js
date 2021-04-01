@@ -70,7 +70,7 @@ class Jobs extends Component {
       allMyJobs = [];
       // console.log('apply filter test', this.filterColumns('Applied'))
       columns.forEach(column => this.filterColumns(column));
-      let indexed = this.indexAll(allMyJobs)
+      this.indexAll(allMyJobs)
       console.log('alljobs after filter test:', allMyJobs);
       console.log('indexed pls:', allMyJobs);
       this.props.updateJob(draggedItem._id, draggedItem);
