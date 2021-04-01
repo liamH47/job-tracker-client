@@ -8,35 +8,59 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { withStyles } from '@material-ui/styles';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import { getJobs } from '../../actions/jobs';
+import { getJobs, updateJob, updateIndices } from '../../actions/jobs';
 
+const columns = ['Preparing', 'Applied', 'Interviewing'];
 class Jobs extends Component {
 
-    state = {
-      columns: ['Preparing', 'Applied', 'Interviewing']
+  componentDidMount() {
+    
+  }
+  
+    getIndex = (id) => {
+     let pls = id.indexOf('-');
+     return id.slice(pls + 1);
+    }
+
+    getColumn = (id) => {
+      let pls = id.indexOf('-');
+      return id.slice(0, pls);
     }
 
     onDragEnd = (result) => {
+      
       const { destination, source, draggableId } = result;
-
+      console.log('result:', result)
       if(!destination) {
           return;
       }
 
-      if(destination.droppableId === source.droppableId && 
-        destination.index === source.index
-        ) {
-          return;
-        }
+
+      console.log({jobs: this.props.jobs, draggableId, source, destination})
+      // if(destination.droppableId === source.droppableId && 
+      //   destination.index === source.index
+      //   ) {
+      //     return;
+      //   }
+
+      let draggedItem = this.props.jobs.find(job => job._id === draggableId);
+      let newColumn = this.getColumn(destination.droppableId)
+      draggedItem.status = newColumn;
+      // this.props.updateJob(draggedItem._id, draggedItem);
+      // this.props.updateIndices()
+
+      
 
     }
+
+
     render(){
         const { classes } = this.props;
         return(
             !this.props.jobs.length ? <CircularProgress /> : (
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <section className={classes.mainContainer}>
-                        {this.state.columns.map((column, index) => <Column index={index} setCurrentId={this.props.setCurrentId} title={column}/>)}
+                        {columns.map((column, index) => <Column key={index} index={index} setCurrentId={this.props.setCurrentId} title={column} />)}
                     </section>
                 </DragDropContext>        
                 // <Grid className={classes.container} container alignItems='stretch' spacing={3}>
@@ -47,7 +71,9 @@ class Jobs extends Component {
 
 function mapDispatchToProps(dispatch){
     return{
-        fetchJobs: () => dispatch(getJobs())
+        fetchJobs: () => dispatch(getJobs()),
+        updateJob: (...args) => dispatch(updateJob(...args)),
+        updateIndices: (...args) => dispatch(updateIndices(...args))
     }
 }
 

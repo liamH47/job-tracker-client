@@ -31,6 +31,15 @@ export const updateJob = (id, job) => async (dispatch) => {
     }
 }
 
+export const updateIndices = (jobs) => async (dispatch) => {
+    try {
+        const { data } = await api.updateIndices(jobs)
+        dispatch({ type: 'UPDATE_ALL', payload: data })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const deleteJob = (id) => async(dispatch) => {
     try {
         await api.deleteJob(id);
