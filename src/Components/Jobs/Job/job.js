@@ -2,7 +2,7 @@ import React from 'react';
 import useStyles from './styles'
 import { Card, Button, Typography, CardContent } from '@material-ui/core'
 
-import moment from 'moment';
+// import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { deleteJob } from '../../../actions/jobs';
 import { Draggable } from 'react-beautiful-dnd';
