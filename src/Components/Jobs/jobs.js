@@ -77,9 +77,7 @@ class Jobs extends Component {
       this.props.updateIndices(allMyJobs);
 
       
-      //we need jobs to be reordered in a way that represents the overarching order, as if it were prepared, then applied, then interviewing
-      //map over that array to ensure that each item has an index
-      //then updateIndices
+      //next step is to fix the backend patch action. might have to send the userId as part of the dispatch so that it can find all where the userId matches and only delete those
     }
     
 
