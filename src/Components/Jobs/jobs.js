@@ -73,8 +73,8 @@ class Jobs extends Component {
       let indexed = this.indexAll(allMyJobs)
       console.log('alljobs after filter test:', allMyJobs);
       console.log('indexed pls:', allMyJobs);
-      // this.props.updateJob(draggedItem._id, draggedItem);
-      // this.props.updateIndices()
+      this.props.updateJob(draggedItem._id, draggedItem);
+      this.props.updateIndices(allMyJobs);
 
       
       //we need jobs to be reordered in a way that represents the overarching order, as if it were prepared, then applied, then interviewing
