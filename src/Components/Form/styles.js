@@ -8,11 +8,13 @@ export default makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+    width: '23%'
   },
   form: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+
   },
   fileInput: {
     width: '97%',

@@ -3,7 +3,7 @@ export default {
       margin: '8px',
       border: '1px solid lightgrey',
       borderRadius: '2px',
-      width: '25%',
+      width: '23%',
       height: '80%',
       display: 'flex',
       flexDirection: "column", 

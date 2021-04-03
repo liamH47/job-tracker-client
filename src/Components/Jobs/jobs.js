@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/styles';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { getJobs, updateJob, updateIndices } from '../../actions/jobs';
+import Form from '../Form/form'
 
 const columns = ['Preparing', 'Applied', 'Interviewing'];
 let allMyJobs = [];

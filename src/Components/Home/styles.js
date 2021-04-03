@@ -19,6 +19,12 @@ export default makeStyles((theme) => ({
         grid: {
           flexDirection: 'column-reverse'
         }
-      }
+      },
+      // container: {
+      //   display: 'flex',
+      //   flexDirection: 'row',
+      //   justifyContent: 'center',
+      //   alignItems: 'center',
+      // }
 
 }));
