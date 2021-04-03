@@ -96,7 +96,7 @@ class Jobs extends Component {
                         {columns.map((column, index) => <Column key={index} index={index} setCurrentId={this.props.setCurrentId} title={column} />)}
                     </section>
                 </DragDropContext>        
-                // <Grid className={classes.container} container alignItems='stretch' spacing={3}>
+               
             )
         )
     }

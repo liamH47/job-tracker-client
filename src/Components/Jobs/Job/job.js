@@ -28,9 +28,6 @@ const Job = ({ job, setCurrentId, index }) => {
                 <Typography>
                     {job.role}
                 </Typography>
-                {/* <Typography variant='body2'>
-                    {`Status: ${job.status} as of: ${moment(job.applied).fromNow()}`}
-                </Typography> */}
                 <Button color='primary' size='small' onClick={() => setCurrentId(job._id)}>
                     Edit
                 </Button>

@@ -38,10 +38,7 @@ class Column extends Component {
             // <Grid item key={job._id} xs={12} sm={6}> 
             // </Grid> 
         ))
-        // JSON.parse(user).result.email
-        // const user = localStorage.getItem('profile');
-        // const googleId = JSON.parse(user).result.googleId;
-        // const myJobs = this.props.jobs.filter(job => job.creator === googleId.toString())
+
     }
 
     render() {
